@@ -1,0 +1,271 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+::selection{
+    background-color: #000;
+    color: #fff;
+}
+
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: lightgreen;
+}
+
+.main {
+    width: 100%;
+    height: 100vh;
+    overflow-x: hidden;
+}
+
+.orange {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #FF9933;
+    z-index: 4;
+}
+
+.white {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: #ffffff;
+    z-index: 3;
+}
+
+.green {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: #138808;
+    z-index: 2;
+}
+
+.main>img {
+    opacity: 0;
+    width: 5vh;
+    aspect-ratio: 1;
+    position: fixed;
+    top: 5vh;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5;
+}
+
+.india {
+    width: 300px;
+    height: 150px;
+    overflow: hidden;
+}
+
+h1 {
+    font-size: 100px;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: transparent;
+    -webkit-text-stroke: 2px #000;
+}
+
+.page1 {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 90%;
+    height: 50vh;
+}
+
+
+.page1>.hero>h1 {
+    padding: 0px 10px;
+    opacity: 0;
+    font-size: 60px;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: transparent;
+    -webkit-text-stroke: 2px #000;
+}
+
+
+.page1>.hero>h1:hover {
+    color: black;
+}
+
+.page1>.explore {
+    position: absolute;
+    top: 85%;
+    left: 5%;
+    
+}
+
+h3 {
+    opacity: 0;
+    font-size: 24px;
+    color: black;
+    text-transform: capitalize;
+}
+
+
+.page1>.imgcontainer {
+    position: absolute;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    width: 30%;
+    height: 20vh;
+}
+
+
+
+.page1>.imgcontainer>img {
+
+    /* background: linear-gradient(to bottom,#FF9933,#138808); */
+    border-radius: 10px;
+    width: 15vw;
+    aspect-ratio: 16/9;
+    object-fit: fill;
+    opacity: 0;
+    box-shadow: 0px 0px 50px 2px #FF9933;
+
+    animation-name: imgrotate;
+    animation-iteration-count: infinite;
+    animation-duration: 2s;
+    animation-timeline: linear;
+    animation-timing-function: ease-in-out;
+}
+
+
+
+
+
+@keyframes imgrotate {
+    from {
+        transform: rotateY(0deg);
+    }
+
+    to {
+        transform: rotateY(360deg);
+    }
+}
+
+.page2{
+    width: 100%;
+    min-height: 100vh;
+    padding: 10vw 15vw;
+}
+
+
+.fheading>h1 {
+    line-height: 1;
+    font-size: 4vw;
+    font-weight: 800;
+}
+
+.fheading>h1:nth-child(2) {
+    color: transparent;
+    -webkit-text-stroke: 1px #000;
+}
+
+#fimages {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 100vh;
+    margin-top: 5vw;
+}
+
+#fleft {
+    overflow: hidden;
+    width: 45%;
+    height: inherit;
+}
+
+.fleftelm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: inherit;
+}
+
+.fleftelm h1 {
+    font-size: 4vw;
+    line-height: 1;
+    font-weight: 600;
+    text-transform: capitalize;
+    margin: 1.5vw 0;
+}
+
+.fleftelm h3 {
+    font-size: 2.5vw;
+    font-weight: 400;
+    opacity: 1;
+}
+
+.fleftelm h4 {
+    opacity: .5;
+}
+
+#fright {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 45%;
+    height: inherit;
+    
+}
+
+#fright .images {
+    overflow: visible;
+    width: 90%;
+    height: 90%;
+}
+
+#fright .images img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.btndiv {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btndiv button {
+    padding: 1.3vw 2.5vw;
+    border-radius: 100px;
+    border: 2px solid #e6e6e6;
+    background-color: #fff;
+    font-size: 1vw;
+    font-weight: 500;
+    letter-spacing: -1px;
+}
