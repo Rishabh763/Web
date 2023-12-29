@@ -1,10 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Agbalumo&family=Poppins&display=swap');
 
-* {
+*,
+*::after,
+*::before {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 
@@ -17,18 +18,16 @@
     display: none;
 }
 
-html {
-    overflow-y: scroll;
-    -webkit-overflow-scrolling: touch;
-    /* overflow-scrolling: touch; */
-}
 
-html,
-body {
-    overflow-x: hidden;
-    margin: 0;
-    background-color: #ffffff;
+
+html,body {
+    scroll-behavior: smooth !important;
     overscroll-behavior: none;
+    overflow-x: hidden;
+    overscroll-behavior-y: none;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+
     animation-name: backgroundColor;
     animation-timing-function: ease;
     animation-fill-mode: inherit;
@@ -36,8 +35,14 @@ body {
 }
 
 
+:root{
+    --rotateX : 0deg;
+    --rotateY : 0deg;
+    --fs:18px;
+}
+
 .main {
-    text-transform: none;
+    scroll-behavior: smooth;
     height: auto;
 }
 
@@ -162,7 +167,6 @@ body {
     100% {
         stroke-dashoffset: 187;
         transform: rotate(360deg);
-        /* Adjust to a full rotation */
     }
 }
 
@@ -231,7 +235,12 @@ nav {
     z-index: 4;
 }
 
-nav>.block {
+
+nav>a{
+    text-decoration: none;
+}
+
+nav>a>.block {
     position: relative;
     width: 8vh;
     aspect-ratio: 1;
@@ -244,7 +253,7 @@ nav>.block {
     z-index: 2;
 }
 
-nav>.block>h4 {
+nav>a>.block>h4 {
     opacity: 0;
     text-wrap: nowrap;
     position: absolute;
@@ -267,12 +276,12 @@ nav>.block>h4 {
     top: -50%;
 }
 
-nav>.block>i {
+nav>a>.block>i {
     color: white;
     font-size: 28px;
 }
 
-nav>.block:hover {
+nav>a>.block:hover {
     cursor: pointer;
     font-weight: 900;
     box-shadow: 0px 0px 10px 2px #000000a0;
@@ -344,32 +353,81 @@ h3 {
     align-items: center;
     justify-content: center;
     transform-style: preserve-3d;
-    perspective: 1000px;
+
+    
     width: clamp(12rem, 40%, 24rem);
     height: clamp(150px, 15vh, 350px);
 }
 
 
-
 .page1>.imgcontainer>img {
     border-radius: 10px;
-    width: clamp(12rem, 15vw, 24rem);
+    transform-style: preserve-3d;
+    transform: rotateX(var(--rotateX)) rotateY(var(--rotateY)) perspective(1000px);
+
     aspect-ratio: 16/9;
     object-fit: fill;
     opacity: 0;
     box-shadow: 0px 0px 50px 2px #FF9933;
 
-    animation-name: imgrotate;
+    /* animation-name: imgrotate;
     animation-iteration-count: infinite;
     animation-duration: 2s;
     animation-timeline: linear;
-    animation-timing-function: ease-in-out;
+    animation-timing-function: ease-in-out; */
 }
 
 
+.page1>.imgcontainer>.shadow{
+    content: "";
+    position: absolute;
+    border-radius: 10px;
+
+    width: 80%;
+    height: 100%;
+    margin-inline: auto;
+    
+    inset: -1rem;
+    transform: rotateX(var(--rotateX)) rotateY(var(--rotateY)) perspective(1000px) translateY(10%) translateZ(-40px);
+
+    background: black;
+    opacity: 0;
+}
+
+.page1>.imgcontainer>.bg{
+    content: "";
+    position: absolute;
+    border-radius: 10px;
+    
+
+    width: 90%;
+    height: 120%;
+    margin-inline: auto;
+
+    inset: -1rem;
+    transform: rotateX(var(--rotateX)) rotateY(var(--rotateY)) perspective(1000px)  translateZ(-50px);
+
+    background-color: transparent;
+    background: linear-gradient(to bottom,#FF9933 0%,#fff 50%,#138808 100%) ;
+    opacity: 0;
+}
+
+/* .page1>.imgcontainer::after{
+    
+}
+
+.page1>.imgcontainer::before{
+    
+
+} */
 
 
-@keyframes imgrotate {
+
+
+
+
+
+/* @keyframes imgrotate {
     0% {
         transform: rotateY(-20deg);
     }
@@ -379,11 +437,10 @@ h3 {
     100% {
         transform: rotateY(-20deg);
     }
-}
+} */
 
 .page2 {
     width: 400%;
-    /* Adjust the width according to your design */
     height: 100vh;
     display: flex;
     overflow: hidden;
@@ -391,18 +448,21 @@ h3 {
 }
 
 @keyframes backgroundColor {
+    0%,25%{
+        background-color: black;
+    }
 
-    0%,
-    33.33% {
+    26%,
+    49% {
         background-color: #FF3FA4;
     }
 
-    40% {
+    50% ,59%{
         background-color: #FF9209;
 
     }
 
-    60% {
+    60%,80% {
         background-color: #A8DF8E;
     }
 
@@ -426,11 +486,16 @@ h3 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 1rem;
     padding: 10vh 5vw;
 }
 
 .page2>.block>.left>h1 {
+    color: #000;
+}
+.page2>.block>.left>h2 {
+    text-transform: uppercase;
     color: #000;
 }
 
@@ -450,6 +515,10 @@ h3 {
     object-fit: cover;
 }
 
+/* .page2>.block:nth-child(3)>.right>img{
+    object-fit: fill;
+} */
+
 .page3 {
     width: 100%;
     height: 100vh;
@@ -468,10 +537,11 @@ h3 {
 }
 
 .page3>.viewcontainer>h1 {
-    color: #000;
+    color: #fff;
     text-align: center;
     font-size: 6vw;
     text-transform: capitalize;
+    transform: translateY(-300%);
 }
 
 
@@ -482,7 +552,11 @@ h3 {
 }
 
 .page4>.block__container{
-    color:white;
+    z-index: 0;
+    width: 100%;
+    height:100%;
+    color: white;
+    position: relative;
 }
 
 .page4>.block__container>hr{
@@ -491,16 +565,57 @@ h3 {
 }
 
 .page4>.block__container>.block{
+    height: 200px;
+    padding: 2rem;
+
+    margin: auto;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
+    gap: 1rem;
+    transform: translateX(-120%);
+    opacity: 1;
 }
 
-.page4>.block__container>.block>img{
-    display: none;
+.page4>.block__container>.block>h1{
+    
+    font-size: calc(var(--fs)*1.6);
 }
 
-.page5 {
+.page4>.block__container>.block>.text{
+    display: flex;
+    align-items: last baseline;
+    justify-content: space-between;
+}
+
+
+.page4>.block__container>.block>.text>p{
+    width: 60%;
+    color: #fff;
+}
+
+.page4>.block__container>.block>.text>.location{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    /* gap: 0.5rem; */
+}
+
+.page4>.block__container>.block>.text>.location>h5{
+    font-size: calc(var(--fs)*1);
+    color: #fff;
+    transition: all 0.3s ease-in-out;
+}
+
+
+.page4>.block__container>.block>.text>.location>h6{
+    font-size: calc(var(--fs)*0.8);
+    color: #ffffffca;
+    transition: all 0.3s ease-in-out;
+}
+
+
+
+/* .page5 {
     width: 100%;
     min-height: 100vh;
     display: grid;
@@ -515,9 +630,111 @@ h3 {
 .page5>.block {
     flex-basis: 1;
     padding: 1rem 2rem;
-    /* background-color: red; */
+    /* background-color: red; 
 }
 
 .page5>.block>h1 {
     color: #000;
+} */
+
+
+
+
+/* footer */
+
+
+
+footer {
+    width: 100%;
+    height: 40vh;
+    max-height: calc(var(--max-height)*0.4);
+    background-color: black;
+
+    display: grid;
+    grid-template-areas: 'a a a b c d';
+    gap: 2rem;
+    grid-template-columns: repeat(6, 1fr);
+
+    padding: 3rem 6rem;
+}
+
+
+
+footer>*>:where(h1) {
+    color: #fff;
+    font-size: calc(var(--fs)*1.6);
+    font-weight: 700;
+    text-transform: capitalize;
+}
+
+footer>*>:where(a) {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+    opacity: 0.6;
+    cursor: pointer;
+}
+
+
+footer>.spense {
+    grid-area: a;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+}
+
+footer>.spense>p {
+    width: 80%;
+    color: #fff;
+}
+
+footer>.sitemap {
+    grid-area: b;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+footer>.resources {
+    grid-area: c;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+
+
+footer>.contributors {
+    grid-area: d;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+
+@media only screen and (min-width:600px) and (max-width: 768px) {
+    footer {
+        height: 50vh;
+        max-height: calc(var(--max-height)*0.5);
+        grid-template-areas: 'a a b c'
+            'd . . .';
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    footer {
+        height: 70%;
+        max-height: calc(var(--max-height)*0.7);
+        padding: 2rem;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-areas: 'a a'
+            'd .'
+            'b c';
+    }
+
+    footer>.spense>p {
+        width: 100%;
+    }
 }

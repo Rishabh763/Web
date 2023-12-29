@@ -1,33 +1,5 @@
 gsap.registerPlugin(ScrollTrigger);
 
-// //Using Locomotive Scroll from Locomotive https://github.com/locomotivemtl/locomotive-scroll
-
-// const locoScroll = new LocomotiveScroll({
-//   el: document.querySelector(".main"),
-//   smooth: true
-// });
-// // each time Locomotive Scroll updates, tell ScrollTrigger to update too (sync positioning)
-// locoScroll.on("scroll", ScrollTrigger.update);
-
-// // tell ScrollTrigger to use these proxy methods for the ".main" element since Locomotive Scroll is hijacking things
-// ScrollTrigger.scrollerProxy(".main", {
-//   scrollTop(value) {
-//     return arguments.length ? locoScroll.scrollTo(value, 0, 0) : locoScroll.scroll.instance.scroll.y;
-//   }, // we don't have to define a scrollLeft because we're only scrolling vertically.
-//   getBoundingClientRect() {
-//     return {top: 0, left: 0, width: window.innerWidth, height: window.innerHeight};
-//   },
-//   // LocomotiveScroll handles things completely differently on mobile devices - it doesn't even transform the container at all! So to get the correct behavior and avoid jitters, we should pin things with position: fixed on mobile. We sense it by checking to see if there's a transform applied to the container (the LocomotiveScroll-controlled element).
-//   pinType: document.querySelector(".main").style.transform ? "transform" : "fixed"
-// });
-
-
-
-// // each time the window updates, we should refresh ScrollTrigger and then update LocomotiveScroll. 
-// ScrollTrigger.addEventListener("refresh", () => locoScroll.update());
-
-// // after everything is set up, refresh() ScrollTrigger and update LocomotiveScroll because padding may have been added for pinning, etc.
-// ScrollTrigger.refresh();
 
 var tl = gsap.timeline()
 
@@ -100,7 +72,20 @@ tl.to(".orange, .white, .green, .main>img", {
 });
 
 tl.to(".page1>.imgcontainer>img", {
-    scale: 1.5,
+    opacity: 1,
+    duration: 0.5,
+    delay: -0.5,
+    ease: "linear"
+},"s3");
+
+tl.to(".page1>.imgcontainer>.shadow", {
+    opacity: 0.3,
+    duration: 0.5,
+    delay: -0.5,
+    ease: "linear"
+},"s3");
+
+tl.to(".page1>.imgcontainer>.bg", {
     opacity: 1,
     duration: 0.5,
     delay: -0.5,
@@ -146,8 +131,8 @@ gsap.to(".page3>.viewcontainer>h1",{
     stragger:0.3,
     scrollTrigger:{
        trigger:".page3",
-       start:"830% center",
-       end: "830% center",
+       start:"top center",
+       end: "top center",
        scrub:2,
     //    markers:true,
        ease:"EaseIn",
@@ -155,42 +140,93 @@ gsap.to(".page3>.viewcontainer>h1",{
     },
 });
 
-gsap.from(".page4>.block__container>.block",{
-    x:-1000,
-    stragger:0.1,
-    scrollTrigger:{
-        trigger:".page4",
-        top:"top top",
-        end:"top top",
-        scrub:2,
-        // markers:true,
-        ease:"EaseIn",
-        scroller:"body"
-    },    
+
+// page 4
+
+const blocks = document.querySelectorAll(".page4 > .block__container > .block");
+const timeline1 = gsap.timeline();
+const timeline2 = gsap.timeline();
+
+
+blocks.forEach((block, index) => {
+    timeline1.to(block, {
+        transform: "translateX(0%)",
+        opacity: 1,
+        scrollTrigger: {
+            trigger: block,
+            start: "bottom bottom", // Adjust the start position as needed
+            end: "bottom bottom",   // Adjust the end position as needed
+            scrub: 1,
+            // markers: true,
+            ease: "power1.inOut",
+            scroller:"body",
+        },
+    });
+
+    timeline2.from(block, {
+        transform: "translateX(0%)",
+        opacity: 1,
+        scrollTrigger: {
+            trigger: block,
+            start: "top top", // Adjust the start position as needed
+            end: "top top",   // Adjust the end position as needed
+            scrub: 1,
+            // markers: true,
+            ease: "power1.inOut",
+            scroller:"body",
+        }
+    });
 });
 
-gsap.to(".page4>.block__container>.block",{
-    x:-1000,
-    stragger:0.1,
-    scrollTrigger:{
-        trigger:".page4",
-        top:"top bottom",
-        end:"top bottom",
-        scrub:2,
-        // markers:true,
-        ease:"EaseIn",
-        scroller:"body"
-    },    
+
+// img effect
+
+const img = document.querySelector(".page1>.imgcontainer");
+
+
+document.addEventListener("mousemove",(e)=>{
+    rotateElement(e,img);
 });
 
+function rotateElement(event, element){
+    const x = event.clientX;
+    const y = event.clientY;
+    
+    const middleX = window.innerWidth / 2;
+    const middleY = window.innerHeight /2;
+
+    const offsetX = ((x-middleX)/middleX)*30;
+    const offsetY = ((y-middleY)/middleY )*30;
+
+    element.style.setProperty("--rotateX",-1*offsetY + "deg");
+    element.style.setProperty("--rotateY",offsetX + "deg");
+
+    // console.log(offsetX,offsetY)
+
+}
 
 
 
 Shery.mouseFollower();
 Shery.makeMagnet(".magnet");
 
-Shery.hoverWithMediaCircle(".hvr,nav>.block", {
+Shery.hoverWithMediaCircle(".page1>.hero>h1", {
     images: [""]
+});
+
+Shery.hoverWithMediaCircle(".hvr,nav>a>.style1", {
+    images: [""]
+});
+
+Shery.hoverWithMediaCircle(".page4>.block__container>.block", {
+    images: ["./images/aurangabad.jpg",
+    "./images/pondicherry.webp",
+    "./images/madurai.jpg",
+    "./images/kutch.jpg",
+    "./images/khajuraho.jpg",
+    "./images/coorg.jpg",
+    "./images/dhanaulti.jpg",
+    "./images/hampi.jpg"]
 });
 
 Shery.imageEffect(".page2>.block>.right>img", {
@@ -198,6 +234,8 @@ Shery.imageEffect(".page2>.block>.right>img", {
     // debug:true,
     config: {"a":{"value":1.37,"range":[0,30]},"b":{"value":0.94,"range":[-1,1]},"zindex":{"value":"0","range":[-9999999,9999999]},"aspect":{"value":1.0290862057820747},"ignoreShapeAspect":{"value":true},"shapePosition":{"value":{"x":0,"y":0}},"shapeScale":{"value":{"x":0.5,"y":0.5}},"shapeEdgeSoftness":{"value":0,"range":[0,0.5]},"shapeRadius":{"value":0,"range":[0,2]},"currentScroll":{"value":0},"scrollLerp":{"value":0.07},"gooey":{"value":false},"infiniteGooey":{"value":false},"growSize":{"value":4,"range":[1,15]},"durationOut":{"value":1,"range":[0.1,5]},"durationIn":{"value":1.5,"range":[0.1,5]},"displaceAmount":{"value":0.5},"masker":{"value":true},"maskVal":{"value":1.46,"range":[1,5]},"scrollType":{"value":0},"geoVertex":{"range":[1,64],"value":41.61},"noEffectGooey":{"value":true},"onMouse":{"value":1},"noise_speed":{"value":0.2,"range":[0,10]},"metaball":{"value":0.2,"range":[0,2]},"discard_threshold":{"value":0.5,"range":[0,1]},"antialias_threshold":{"value":0.002,"range":[0,0.1]},"noise_height":{"value":0.5,"range":[0,2]},"noise_scale":{"value":10,"range":[0,100]},"uColor":{"value":true},"uSpeed":{"value":0.39,"range":[0.1,1],"rangep":[1,10]},"uAmplitude":{"value":1.61,"range":[0,5]},"uFrequency":{"value":4.96,"range":[0,10]}},
 });
+
+
 
 
 let sections = gsap.utils.toArray(".page2>.block");
@@ -214,4 +252,5 @@ gsap.to(sections, {
         end: () => "85+=" + document.querySelector(".page2").offsetWidth
     }
 });
+
 
