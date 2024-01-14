@@ -170,11 +170,16 @@ html,body {
     }
 }
 
+.orange,
+.white,
+.green{
+    left: 50%;
+    transform: translateX(-50%);
+}
 
 .white {
     position: fixed;
     top: 0;
-    left: 0;
     width: 100%;
     height: 100vh;
     background-color: #ffffff;
@@ -184,7 +189,6 @@ html,body {
 .green {
     position: fixed;
     top: 0;
-    left: 0;
     width: 100%;
     height: 100vh;
     background-color: #138808;
@@ -203,6 +207,7 @@ html,body {
 }
 
 .india {
+    text-align: center;
     width: 300px;
     height: 150px;
     overflow: hidden;
@@ -210,21 +215,23 @@ html,body {
 
 h1 {
     font-family: Agbalumo;
-    font-size: 100px;
+    font-size: clamp(3rem,5vw,6rem);
     font-weight: 900;
     text-transform: uppercase;
     color: white;
+    line-height: 1.2;
+    letter-spacing: -1px;
     /* -webkit-text-stroke: 2px #000; */
 }
 
 
 nav {
     display: block;
-    width: min-content;
+    width: min(100%,20rem);
     height: 10vh;
     position: fixed;
-    bottom: 2vh;
     left: 50%;
+    bottom: 2vh;
     transform: translateX(-50%);
     display: flex;
     align-items: center;
@@ -233,16 +240,18 @@ nav {
     padding: 0rem 1vh;
     border-radius: 0.5rem;
     z-index: 4;
+
 }
 
 
 nav>a{
+    width: 22%;
     text-decoration: none;
 }
 
 nav>a>.block {
     position: relative;
-    width: 8vh;
+    width: 100%;
     aspect-ratio: 1;
     background-color: #000000a0;
     border-radius: 1rem;
@@ -258,7 +267,7 @@ nav>a>.block>h4 {
     text-wrap: nowrap;
     position: absolute;
     text-transform: capitalize;
-    font-family: agbalumo;
+    font-family: Agbalumo;
     font-weight: 500;
     top: 0;
     left: 50%;
@@ -295,6 +304,11 @@ nav>a>.block:hover {
     display: flex;
     align-items: center;
     justify-content: center;
+
+    background-image: url(./images/hero-img.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 }
 
 
@@ -313,18 +327,20 @@ nav>a>.block:hover {
 }
 
 .hero {
+    height: fit-content;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 90%;
-    height: 50vh;
+    flex-wrap: wrap;
+    width: 95%;
+    /* height: 50vh; */
 }
 
 
 .page1>.hero>h1 {
     padding: 0px 10px;
     opacity: 0;
-    font-size: 4.5vw;
+    /* font-size: calc(1rem,5vw,6rem); */
     font-weight: 900;
     text-transform: uppercase;
     color: white;
@@ -412,32 +428,8 @@ h3 {
     opacity: 0;
 }
 
-/* .page1>.imgcontainer::after{
-    
-}
-
-.page1>.imgcontainer::before{
-    
-
-} */
 
 
-
-
-
-
-
-/* @keyframes imgrotate {
-    0% {
-        transform: rotateY(-20deg);
-    }
-    50% {
-        transform: rotateY(20deg);
-    }
-    100% {
-        transform: rotateY(-20deg);
-    }
-} */
 
 .page2 {
     width: 400%;
@@ -565,7 +557,7 @@ h3 {
 }
 
 .page4>.block__container>.block{
-    height: 200px;
+    min-height: 200px;
     padding: 2rem;
 
     margin: auto;
@@ -615,30 +607,6 @@ h3 {
 
 
 
-/* .page5 {
-    width: 100%;
-    min-height: 100vh;
-    display: grid;
-    align-items: center;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    grid-template-rows: repeat(auto-fit, minmax(200px, 1fr));
-    padding: 5vh 6vw;
-    grid-gap: 1rem;
-    overflow: hidden;
-}
-
-.page5>.block {
-    flex-basis: 1;
-    padding: 1rem 2rem;
-    /* background-color: red; 
-}
-
-.page5>.block>h1 {
-    color: #000;
-} */
-
-
-
 
 /* footer */
 
@@ -646,8 +614,7 @@ h3 {
 
 footer {
     width: 100%;
-    height: 40vh;
-    max-height: calc(var(--max-height)*0.4);
+    min-height: 40vh;
     background-color: black;
 
     display: grid;
@@ -712,11 +679,39 @@ footer>.contributors {
     gap: 1rem;
 }
 
+@media only screen and (max-width:900px){
+    .page1>.imgcontainer>.bg,
+    .page1>.imgcontainer>.shadow{
+        display: none;
+    }
 
-@media only screen and (min-width:600px) and (max-width: 768px) {
+    .hero>.hvr.hvr{
+        color: black;
+        font-size: 2rem;
+    }
+
+    .page1>video{
+        display: none;
+    }
+
+    .page2{
+        padding-inline: 1rem ;
+    }
+
+    .page2>.block{
+        flex-direction: column;
+    }
+    .page2>.block>.left,
+    .page2>.block>.right{
+        width: 100%;
+        padding: 0;
+        padding: 1rem;
+        height: 50%;
+    }
+}
+
+@media only screen and (min-width:600px) and (max-width: 1024px) {
     footer {
-        height: 50vh;
-        max-height: calc(var(--max-height)*0.5);
         grid-template-areas: 'a a b c'
             'd . . .';
         grid-template-columns: repeat(4, 1fr);
@@ -725,8 +720,6 @@ footer>.contributors {
 
 @media only screen and (max-width: 600px) {
     footer {
-        height: 70%;
-        max-height: calc(var(--max-height)*0.7);
         padding: 2rem;
         grid-template-columns: repeat(2, 1fr);
         grid-template-areas: 'a a'
@@ -737,4 +730,51 @@ footer>.contributors {
     footer>.spense>p {
         width: 100%;
     }
+
+    .page4{
+        padding-inline: 0.5rem;
+    }
+
+    .page4>.block__container>.block{
+        padding-inline: 0;
+        
+    }
+
+    .page4>.block__container>.block>.text{
+        flex-direction: column;
+        align-items:  baseline;
+        gap: 1rem;
+    }
+    
+    .page4>.block__container>.block>.text>p{
+        width: 100%;
+    }
+    .page4>.block__container>.block>.text>.location{
+        align-items: flex-start;
+    }
 }
+
+
+
+/* lenis scroll */
+
+
+html.lenis {
+    height: auto;
+  }
+  
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+  
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+  
+  .lenis.lenis-scrolling iframe {
+    pointer-events: none;
+  }

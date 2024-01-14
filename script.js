@@ -1,3 +1,16 @@
+// lenis smooth scroll
+
+const lenis = new Lenis()
+
+lenis.on('scroll', ScrollTrigger.update)
+
+gsap.ticker.add((time)=>{
+  lenis.raf(time * 1000)
+})
+
+gsap.ticker.lagSmoothing(0)
+
+
 gsap.registerPlugin(ScrollTrigger);
 
 
@@ -51,8 +64,7 @@ tl.to(".page1>video",{
 },"s2");
 
 tl.to(".orange,.white,.green", {
-    width: "15vw",
-    left: "42.5vw",
+    width: "max(12rem,15vw)",
     duration: 1,
     delay: 0,
     ease: "EaseOut"
