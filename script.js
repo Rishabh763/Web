@@ -71,12 +71,12 @@ tl.to(".orange,.white,.green", {
 });
 
 
-tl.to(".main>img", {
+tl.to(".loader>img", {
     opacity: 1,
     delay: -1,
 });
 
-tl.to(".orange, .white, .green, .main>img", {
+tl.to(".orange, .white, .green, .loader>img", {
     opacity: 0,
     duration: 0.5,
     delay: 0,
