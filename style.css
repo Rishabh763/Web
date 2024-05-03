@@ -39,25 +39,24 @@ html,body {
 
 .content-grid {
     --padding-inline: 1rem;
-    
-    --content-max-width: 1440px;
-    --breakout-max-width: 1920px;
-  
-    --breakout-size: calc(
-      calc(var(--breakout-max-width) - var(--content-max-width)) / 2
-    );
-  
-    display: grid;
-    grid-template-columns:
-      [full-width-start] minmax(var(--padding-inline), 1fr)
-      [breakout-start] minmax(0, var(--breakout-size))
-      [content-start] min(
-        100% - calc(var(--padding-inline) * 2),
-        var(--content-max-width)
-      )
-      [content-end]
-      minmax(0, var(--breakout-size)) [breakout-end]
-      minmax(var(--padding-inline), 1fr) [full-width-end];
+  --content-max-width: 1440px;
+  --breakout-max-width: 1920px;
+
+  --breakout-size: calc(
+    calc(var(--breakout-max-width) - var(--content-max-width)) / 2
+  );
+
+  display: grid;
+  grid-template-columns:
+    [full-width-start] minmax(var(--padding-inline), 1fr)
+    [breakout-start] minmax(0, var(--breakout-size))
+    [content-start] min(
+      calc(100% - calc(var(--padding-inline) * 2)),
+      var(--content-max-width)
+    )
+    [content-end]
+    minmax(0, var(--breakout-size)) [breakout-end]
+    minmax(var(--padding-inline), 1fr) [full-width-end];
   }
   
   .content-grid > :not(.breakout, .full-width),
@@ -346,10 +345,8 @@ nav>a>.block:hover {
     position: relative;
     width: 100%;
     height: 100vh;
-    background-color: transparent;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: grid;
+    place-items: center;
 
     background-image: url(./images/hero-img.jpg);
     background-repeat: no-repeat;
@@ -361,7 +358,7 @@ nav>a>.block:hover {
 
 .page1>video {
 
-    width: 100%;
+    /* width: 100%; */
     height: 100%;
     object-fit: cover;
     z-index: 0;
@@ -797,6 +794,9 @@ footer>.contributors {
     }
 }
 
+#contactus{
+    background-color: black;
+}
 
 
 /* lenis scroll */
