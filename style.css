@@ -39,19 +39,12 @@ html,body {
 
 .content-grid {
     --padding-inline: 1rem;
-<<<<<<< HEAD
-    --content-max-width: 1400px;
+    
+    --content-max-width: 1440px;
     --breakout-max-width: 1920px;
   
     --breakout-size: calc(
-      (calc(var(--breakout-max-width) - var(--content-max-width))) / 2
-=======
-    --content-max-width: 1920px;
-    --breakout-max-width: 2100px;
-  
-    --breakout-size: calc(
-      (var(--breakout-max-width) - var(--content-max-width)) / 2
->>>>>>> 30c51c5e6884c02a42cfba0e90b72216eaf493ed
+      calc(var(--breakout-max-width) - var(--content-max-width)) / 2
     );
   
     display: grid;
@@ -367,11 +360,8 @@ nav>a>.block:hover {
 
 
 .page1>video {
-<<<<<<< HEAD
-    width: 100vw;
-=======
+
     width: 100%;
->>>>>>> 30c51c5e6884c02a42cfba0e90b72216eaf493ed
     height: 100%;
     object-fit: cover;
     z-index: 0;
@@ -663,13 +653,6 @@ h3 {
 
 /* footer */
 
-<<<<<<< HEAD
-#contactus{
-    background-color: black;
-}
-=======
-
->>>>>>> 30c51c5e6884c02a42cfba0e90b72216eaf493ed
 
 footer {
     /* width: 100%; */
